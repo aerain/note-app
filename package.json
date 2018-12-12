@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/aerain/note-app/issues"
   },
-  "homepage": "https://github.com/aerain/note-app#readme"
+  "homepage": "https://github.com/aerain/note-app#readme",
+  "dependencies": {
+    "file-saver": "^2.0.0"
+  }
 }
