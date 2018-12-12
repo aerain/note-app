@@ -1,0 +1,22 @@
+{
+  "name": "note-app",
+  "version": "0.0.1",
+  "description": "note app for advanced web class",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aerain/note-app.git"
+  },
+  "keywords": [
+    "note"
+  ],
+  "author": "aerain",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aerain/note-app/issues"
+  },
+  "homepage": "https://github.com/aerain/note-app#readme"
+}
