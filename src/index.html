@@ -15,17 +15,45 @@
 <div class="header">
   <h1>심플노트</h1>
   <div class="menu">
-      <button class="btn-fullscreen"><i class="material-icons">fullscreen</i></button>
-      <button class="btn-about"><i class="material-icons">person</i></button>
+      <button class="btn-fullscreen">
+        <div class="tool-tip">전체화면</div>
+        <i class="material-icons">fullscreen</i>
+      </button>
+      <button class="btn-about">
+        <div class="tool-tip">About</div>
+        <i class="material-icons">person</i>
+      </button>
   </div>
 </div>
 
 <div class="container">
   <div class="menu">
-    <button class="btn-newnote"><i class="material-icons">create</i></button>
-    <button class="btn-savenote"><i class="material-icons">desktop_mac</i></button>
+    <button class="btn-newnote">
+      <div class="tool-tip">새 노트</div>
+      <i class="material-icons">create</i>
+    </button>
+    <button class="btn-savenote">
+      <div class="tool-tip">노트 기록</div>
+      <i class="material-icons">input</i>
+    </button>
+    <button class="btn-savenote">
+      <div class="tool-tip">PC에 저장</div>
+      <i class="material-icons">save_alt</i>
+    </button>
   </div>
   <textarea id="memo" placeholder="내용을 입력하세요"></textarea>
+</div>
+
+<div class="note-list"> 
+  <p class="note-title">당신의 노트</p>
+  <hr class="note-border">
+  <div class="note-container">
+    <div class="note-item">
+      <div class="note-item-number"></div>
+      <div class="note-item-content"></div>
+      <div class="note-item-button"></div>
+    </div>
+  </div>
 </div>
 <div class="overlay">
   <div class="about-layer">

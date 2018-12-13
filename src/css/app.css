@@ -5,15 +5,33 @@
 * {
     font-family: 'Noto Sans KR'
 }
-body,h1 {
+body {
     margin: 0;
     padding: 0;
+    background-color: #e7e7e7;
 }
+p {
+    margin: 0;
+}
+
+.container i {
+    text-shadow: 2px 2px 4px #aaaaaa;
+}
+
+.header i {
+    text-shadow: 2px 2px 4px #000000;
+}
+
 .header {
     background: #3965ad;
     height: 100px;
-    padding: 10px 20px;
-    box-shadow: 0 0 8px #aaaaaa;
+    padding: 10px 10px 10px 30px;
+    box-shadow: 0 0 16px #aaaaaa;
+}
+.header > h1 {
+    color: #ffffff;
+    font-weight: 100;
+    text-shadow: 0px 4px 8px #000000;
 }
 h1 {
     float: left;
@@ -28,7 +46,7 @@ h1 {
 .menu > button {
     background-color:transparent;
     border:0;
-    
+    position: relative;
 }
 
 .header > .menu > button {
@@ -44,9 +62,29 @@ h1 {
     cursor: pointer;
 }
 
+.menu > button:hover > .tool-tip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.tool-tip {
+    visibility: hidden;
+    background-color: #00000088;
+    position:absolute;
+    left: -8px;
+    top: -20px;
+    width: 50px;
+    color: #f7f7f7;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    padding:2px;
+    border-radius: 4px;
+}
+
+
 .container {
     max-width: 600px;
-    margin: -60px auto;
+    margin: -60px auto 60px auto;
     padding:10px;
     border-radius: 10px;
     box-shadow: 0 4px 16px #aaaaaa;
@@ -56,7 +94,8 @@ h1 {
     width: 100%;
     height: 200px;
     border: 0;
-    font-size:20pt;   
+    font-size:20pt;
+    resize: none;   
 }
 
 
@@ -143,5 +182,32 @@ h1 {
 }
 .overlay-exit:hover {
     outline: 0;
+}
 
+.note-list {
+    max-width: 1024px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 16px #aaaaaa;
+    padding: 40px 20px 20px 20px;
+    margin: auto;
+    border-radius: 8px;
+}
+
+.note-list > .note-title {
+    font-size: 20pt;
+}
+
+.note-border {
+    border: 2px solid #e7e7e7;
+}
+
+.note-container {
+    display: flex;
+    height: 100px;
+    background-color: #e7e7e7;
+}
+.note-item {
+    height: 100px;
+    display: flex;
+    
 }
