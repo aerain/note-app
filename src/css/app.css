@@ -106,6 +106,7 @@ h1 {
 
 .overlay > .about-layer > .profile-content {
     flex: 2;
+    position: relative;
 }
 
 .profile-image {
@@ -131,6 +132,16 @@ h1 {
     margin-top:0;  
 }
 
-.profile-content-title {
+.overlay-exit {
+    position: absolute;
+    border: 0;
+    background-color:transparent;
+    color: #777777;
+    right:15px;
+    top:15px;
+    padding: 0;
+}
+.overlay-exit:hover {
+    outline: 0;
 
 }

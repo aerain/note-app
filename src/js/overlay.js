@@ -8,6 +8,10 @@ class AboutOverlay {
         this.bindMethod = this.bindMethod.bind(this);
         this.bindMethod();
         
+        this.aboutElement = aboutElement;
+        this.aboutElement.addEventListener('click', this.pressAbout);
+
+        this.setAboutEventListener(aboutElement);
         this.setAboutOverLay(aboutOverlay);
         this.setAboutElement(aboutElement);
     }
@@ -15,8 +19,6 @@ class AboutOverlay {
     bindMethod() {
         this.toggleOverlay = this.toggleOverlay.bind(this);
         this.setAboutEventListener = this.setAboutEventListener.bind(this);
-        this.setAboutElement = this.setAboutElement.bind(this);
-        this.setAboutOverLay = this.setAboutOverLay.bind(this);
         this.pressAbout = this.pressAbout.bind(this);
     }
 
@@ -29,10 +31,6 @@ class AboutOverlay {
         this.isVisible = !this.isVisible;
     }
 
-    setAboutOverLay(aboutOverlay) {
-        this.aboutOverlay = aboutOverlay;
-    }
-
     setAboutElement(aboutElement) {
         this.aboutElement = aboutElement;
         if(aboutElement === null) {
@@ -42,7 +40,7 @@ class AboutOverlay {
                 console.log('올바른 요소가 들어가지 않았습니다.');
             }
         } else {
-            this.setAboutEventListener(aboutElement);
+            
         }       
     }
 
@@ -50,8 +48,7 @@ class AboutOverlay {
         if(this.aboutElement) {
             this.aboutElement.removeEventListener('click', this.pressAbout);
         }
-        this.aboutElement = aboutElement;
-        this.aboutElement.addEventListener('click', this.pressAbout);
+        
     }
 
     pressAbout(event) {
