@@ -1,10 +1,10 @@
 class AboutOverlay {
     constructor(aboutElement, overlay) {
         this.isVisible = false;
-
         this.overlay = overlay;
         this.content = overlay.querySelector('.about-layer')
         
+
         this.bindMethod = this.bindMethod.bind(this);
         this.bindMethod();
         

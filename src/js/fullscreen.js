@@ -1,18 +1,16 @@
 class FullScreen {
     constructor(fullScreenElement) {
         this.isFullScreen = false;
-        
+        this.fullScreenElement = fullScreenElement;
+
         this.bindMethod = this.bindMethod.bind(this);
         this.bindMethod();
 
-        this.fullScreenElement = fullScreenElement;
-        this.init();
-    }
-    
-    init() {
+        
         this.fullScreenElement.addEventListener('click', this.toggleFullScreen);
         this.changeFullScreenIcon();
     }
+    
     bindMethod() {
         this.toggleFullScreen = this.toggleFullScreen.bind(this);
         this.changeFullScreenIcon = this.changeFullScreenIcon.bind(this);
