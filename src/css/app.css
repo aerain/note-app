@@ -1,25 +1,136 @@
+@import url(./notosanskr.css);
+@import url(./materialicon.css);
+@import url('./all.css');
+
+* {
+    font-family: 'Noto Sans KR'
+}
 body,h1 {
     margin: 0;
     padding: 0;
 }
 .header {
-    background: #eee;
-    height: 30px;
-    padding: 10px;
+    background: #3965ad;
+    height: 100px;
+    padding: 10px 20px;
+    box-shadow: 0 0 8px #aaaaaa;
 }
 h1 {
     float: left;
+    
 }
 .menu {
     float:right;
     margin: 0 0 0 0;
     padding: 10px;
 }
+
+.menu > button {
+    background-color:transparent;
+    border:0;
+    
+}
+
+.header > .menu > button {
+    color: #ffffff;
+}
+.container > .menu > button {
+    color: #777777;
+}
+.menu > button:focus {
+    outline:0;
+}
+.menu > button:hover {
+    cursor: pointer;
+}
+
 .container {
     max-width: 600px;
-    margin: 20px auto;
+    margin: -60px auto;
+    padding:10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px #aaaaaa;
+    background-color: #ffffff;
 }
 #memo {
     width: 100%;
     height: 200px;
+    border: 0;
+    font-size:20pt;   
+}
+
+
+#memo:focus {
+    outline: 0;
+}
+
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top:0;
+    right:0;
+    left:0;
+    bottom:0;
+    background-color: #77777755;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+.overlay.overlay-toggle {
+    display: flex;
+}
+
+.overlay > .about-layer {
+    width: 800px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px #aaaaaa;
+    background-color: #ffffff;
+    margin:auto;
+    display: flex;
+    flex-direction:row;
+    overflow: hidden;
+}
+
+.overlay > .about-layer > * {
+    padding: 20px 10px;
+}
+.overlay > .about-layer > .profile {
+    flex: 1;
+    background-color: #3965ad;
+    display: flex;
+    align-items: center;
+    flex-direction:column;
+}
+
+.overlay > .about-layer > .profile-content {
+    flex: 2;
+}
+
+.profile-image {
+    background-image: url('../img/profile-image.jpg');
+    background-size: 100%;
+    width:200px;
+    height:200px;
+    border-radius:50%;
+    box-shadow:0 0 8px #777777;
+}
+
+.profile > * {
+    color: #ffffff;
+}
+
+.profile-name {
+    font-weight: bold;
+    font-size: 16pt;
+    margin-bottom: 0;
+}
+
+.profile-github {
+    margin-top:0;  
+}
+
+.profile-content-title {
+
 }
