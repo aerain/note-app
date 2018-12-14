@@ -23,3 +23,5 @@ const fullscreen = new FullScreen(fullScreenButton, fullscreenCallback);
 const overlay = new AboutOverlay(aboutButton, aboutOverlay, 'overlay-toggle');
 const note = new Note(textarea, newNote, saveNote, savePCNote, modal);
 
+
+

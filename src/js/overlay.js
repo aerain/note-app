@@ -19,6 +19,4 @@ function AboutOverlay(aboutElement, overlay, toggleClassName) {
     
     this.aboutElement.addEventListener('click', this.toggleOverlay);
     this.exitButton.addEventListener('click', this.toggleOverlay);
-
-    
 }

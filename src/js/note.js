@@ -1,26 +1,21 @@
-class Note {
-    constructor(noteContent, newNoteButtonElement, saveNoteToStorageButtonElement ,saveNoteButtonElement, modalElement) {
-        this.noteContent = noteContent;
-        this.newNoteButtonElement = newNoteButtonElement;
-        this.saveNoteToStorageButtonElement = saveNoteToStorageButtonElement;
-        this.saveNoteButtonElement = saveNoteButtonElement;
-        this.modalElement = modalElement;
+function Note(
+    noteContent, 
+    newNoteButtonElement, 
+    saveNoteToStorageButtonElement,
+    saveNoteButtonElement, 
+    modalElement, 
+    newModalYesClassName = 'modal-yes', 
+    newModalNoClassName = 'modal-no') {
 
-        this.bindMethod = this.bindMethod.bind(this);
-        this.bindMethod();
-        this.setEventListener();
-    }
+    this.noteContent = noteContent;
+    this.newNoteButtonElement = newNoteButtonElement;
+    this.saveNoteToStorageButtonElement = saveNoteToStorageButtonElement;
+    this.saveNoteButtonElement = saveNoteButtonElement;
+    this.modalElement = modalElement;
+    this.newModalYesClassName = newModalYesClassName;
+    this.newModalNoClassName = newModalNoClassName;
 
-    bindMethod() {
-        this.setEventListener = this.setEventListener.bind(this);
-        this.newNote = this.newNote.bind(this);
-        this.saveNoteToLocalStorage = this.saveNoteToLocalStorage.bind(this);
-        this.saveNoteToPC = this.saveNoteToPC.bind(this);
-        this.modalEvent = this.modalEvent.bind(this);
-        this.modalYes = this.modalYes.bind(this);
-    }
-
-    setEventListener() {
+    this.setEventListener = () => {
         this.newNoteButtonElement.addEventListener('click', this.newNote);
         this.saveNoteToStorageButtonElement.addEventListener('click', this.saveNoteToLocalStorage)
         this.saveNoteButtonElement.addEventListener('click', this.saveNoteToPC);
@@ -28,33 +23,58 @@ class Note {
         
     }
 
-    newNote(event) {
+    this.newNote = event => {
         if(this.noteContent.value !== "") {
             console.log("뭐");
             this.modalElement.classList.add('has-text');
         } else {
             this.modalEvent();
         }
-    }   
+    }  
 
-    saveNoteToLocalStorage(event) {
-        console.log('스토리지');
+    this.saveNoteToLocalStorage = async event => {
+        let note = await this.getNoteDataFromStorage();    
+        let item = {
+            id: note.length + 1,
+            content: this.noteContent.value
+        }
+
+        note.data.push(item);
+        note.length++;
+
+        await localStorage.setItem("note", JSON.stringify(note));
     }
 
-    saveNoteToPC(event) {
+    this.getNoteDataFromStorage = async () => {
+        try {
+            var note = JSON.parse(await localStorage.getItem("note"));
+        } catch (err) {
+            var note = {
+                data : [],
+                length : 0
+            }
+        }
+        return note;
+    }
+        
+    this.saveNoteToPC = event => {
         console.log('저장')
     }
 
-    modalYes() {
+    this.modalYes = () => {
         this.noteContent.value = "";
     }
-    modalEvent(event) {
+
+    this.modalEvent = event => {
         let touchedElement = event.target;
-        if(touchedElement.className === "modal has-text" || touchedElement.className === "modal-no") {
+        if(touchedElement.className.match(/has-text/) || touchedElement.className === this.newModalNoClassName) {
             this.modalElement.classList.remove('has-text');
-        } else if(touchedElement.className === "modal-yes") {
+        } else if(touchedElement.className === this.newModalYesClassName) {
             this.modalYes();
+            this.modalElement.classList.remove('has-text');
         }
     }
+
+    this.setEventListener();
 
 }
