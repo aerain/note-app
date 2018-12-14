@@ -10,6 +10,13 @@ var saveNote = document.querySelector('.btn-savenote-to-storage');
 var savePCNote = document.querySelector('.btn-savenote');
 var modal = document.querySelector('.modal');
 
-const header = new FullScreen(fullScreenButton);
+const fullscreen = new FullScreen(fullScreenButton, () => {
+    if(fullScreenButton.querySelector('i').innerText == "fullscreen") {
+        fullScreenButton.querySelector('i').innerText = "fullscreen_exit";
+    } else {
+        fullScreenButton.querySelector('i').innerText = "fullscreen";
+    }
+});
 const overlay = new AboutOverlay(aboutButton, aboutOverlay);
 const note = new Note(textarea, newNote, saveNote, savePCNote, modal);
+

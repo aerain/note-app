@@ -1,47 +1,35 @@
-class FullScreen {
-    constructor(fullScreenElement) {
-        this.isFullScreen = false;
-        this.fullScreenElement = fullScreenElement;
-
-        this.bindMethod = this.bindMethod.bind(this);
-        this.bindMethod();
-
-        
-        this.fullScreenElement.addEventListener('click', this.toggleFullScreen);
-        this.changeFullScreenIcon();
-    }
+function FullScreen(buttonElement, callback = null) {
+    this.isFullScreen = false;
+    this.buttonElement = buttonElement;
     
-    bindMethod() {
-        this.toggleFullScreen = this.toggleFullScreen.bind(this);
-        this.changeFullScreenIcon = this.changeFullScreenIcon.bind(this);
+    /**
+     * onChangeFullScreen
+     * (function) callback
+     * 
+     * 풀스크린 감지할때 발동
+     */
+    this.onChangeFullScreen = (callback = null) => {
+        if(callback !== null) 
+            document.addEventListener('fullscreenchange', callback, false);
     }
 
-    changeFullScreenIcon() {
-        document.addEventListener('fullscreenchange', () => {
-            if(this.fullScreenElement.querySelector('i').innerText == "fullscreen") {
-                this.fullScreenElement.querySelector('i').innerText = "fullscreen_exit";
-                this.isFullScreen = true;
-            } else {
-                this.fullScreenElement.querySelector('i').innerText = "fullscreen";
-                this.isFullScreen = false;
-            }
-        }, false);
-    }
-
-    async toggleFullScreen(event) {
+    /** 
+     * toggleFullScreen
+     * element에 추가되는 이벤트리스너
+     */
+    this.toggleFullScreen = async (event) => {
         if(!this.isFullScreen) {
             await document.documentElement.requestFullscreen();
+            this.isFullScreen = true;
         } else {
             await document.exitFullscreen();
+            this.isFullScreen = false;
         }
     }
 
-    setFullScreenEventListener(fullScreenElement) {
-        if(this.fullScreenElement) {
-            this.fullScreenElement.removeEventListener('click', this.toggleFullScreen);
-        }
-        this.fullScreenElement = fullScreenElement;
-        this.fullScreenElement.addEventListener('click', this.toggleFullScreen);
-    }
-    
+    /**
+     * constructor
+     */
+    this.buttonElement.addEventListener('click', this.toggleFullScreen);
+    this.onChangeFullScreen(callback);
 }
