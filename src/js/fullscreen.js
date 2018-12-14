@@ -30,10 +30,8 @@ class FullScreen {
 
     async toggleFullScreen(event) {
         if(!this.isFullScreen) {
-            console.log('love');
             await document.documentElement.requestFullscreen();
         } else {
-            console.log("babo")
             await document.exitFullscreen();
         }
     }

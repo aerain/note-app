@@ -2,6 +2,13 @@
 @import url(./materialicon.css);
 @import url('./all.css');
 
+input:hover,button:hover {
+    cursor: pointer;
+}
+
+input:focus, button:focus {
+    outline: 0;
+}
 * {
     font-family: 'Noto Sans KR'
 }
@@ -103,7 +110,7 @@ h1 {
     outline: 0;
 }
 
-.overlay {
+.overlay, .modal {
     position: fixed;
     width: 100%;
     height: 100%;
@@ -199,15 +206,34 @@ h1 {
 
 .note-border {
     border: 2px solid #e7e7e7;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .note-container {
     display: flex;
-    height: 100px;
-    background-color: #e7e7e7;
+    flex-direction: column;
 }
 .note-item {
-    height: 100px;
-    display: flex;
-    
+    display: flex;   
+    background-color:#ffffff;
+    padding: 10px 20px;
 }
+
+.note-item > .note-item-delete {
+    background-color: transparent;
+    border: 0
+}
+
+.note-item > .note-item-number {
+    margin: 0px 20px;
+}
+
+.note-item > .note-item-content {
+    flex: 1
+}
+
+.note-item > .note-item-delete {
+}
+
+

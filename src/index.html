@@ -10,6 +10,7 @@
   <script src="../node_modules/file-saver/dist/FileSaver.js"></script>
   <script src="./js/fullscreen.js"></script>
   <script src="./js/overlay.js"></script>
+  <script src="./js/note.js"></script>
 </head>
 <body>
 <div class="header">
@@ -32,7 +33,7 @@
       <div class="tool-tip">새 노트</div>
       <i class="material-icons">create</i>
     </button>
-    <button class="btn-savenote">
+    <button class="btn-savenote-to-storage">
       <div class="tool-tip">노트 기록</div>
       <i class="material-icons">input</i>
     </button>
@@ -49,11 +50,19 @@
   <hr class="note-border">
   <div class="note-container">
     <div class="note-item">
-      <div class="note-item-number"></div>
-      <div class="note-item-content"></div>
-      <div class="note-item-button"></div>
+      <div class="note-item-number">1</div>
+      <div class="note-item-content">기부니가 좋아요</div>
+      <button class="note-item-delete">
+        <i class="material-icons">
+          delete
+        </i>
+      </button>
     </div>
+    <hr class="note-border">
   </div>
+</div>
+<div class="modal">
+   
 </div>
 <div class="overlay">
   <div class="about-layer">
