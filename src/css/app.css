@@ -121,11 +121,12 @@ h1 {
     background-color: #77777755;
     justify-content: center;
     align-items: center;
-    display: none;
+    display: flex;
+    visibility: hidden;
 }
 
 .overlay.overlay-toggle {
-    display: flex;
+    visibility: visible;
 }
 
 .overlay > .about-layer {
@@ -233,7 +234,31 @@ h1 {
     flex: 1
 }
 
-.note-item > .note-item-delete {
+.modal-layer {
+    position: absolute;
+    background-color: #ffffff;
+    width: 500px;
+    left: calc(50% - 250px);
+    top: -300px;
+    box-shadow: 0 4px 12px #aaaaaa;
+    border-radius: 8px;
+    transition: top 0.6s ease;
+    padding: 20px;
 }
 
+.modal.has-text {
+    visibility: visible;
+}
 
+.modal.has-text > .modal-layer {
+    top:80px;
+}
+
+.modal .modal-button {
+    float: right;
+}
+.modal button {
+    background-color: #ffffff;
+    border: 0;
+    font-size: 14pt;
+}
