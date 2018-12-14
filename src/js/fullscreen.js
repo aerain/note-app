@@ -1,6 +1,8 @@
 function FullScreen(buttonElement, callback = null) {
     this.isFullScreen = false;
     this.buttonElement = buttonElement;
+
+    this.callback = callback;
     
     /**
      * onChangeFullScreen
@@ -8,9 +10,8 @@ function FullScreen(buttonElement, callback = null) {
      * 
      * 풀스크린 감지할때 발동
      */
-    this.onChangeFullScreen = (callback = null) => {
-        if(callback !== null) 
-            document.addEventListener('fullscreenchange', callback, false);
+    this.setOnChangeFullScreen = (callback = null) => {
+        this.callback = callback;
     }
 
     /** 
@@ -18,12 +19,18 @@ function FullScreen(buttonElement, callback = null) {
      * element에 추가되는 이벤트리스너
      */
     this.toggleFullScreen = async (event) => {
-        if(!this.isFullScreen) {
-            await document.documentElement.requestFullscreen();
-            this.isFullScreen = true;
-        } else {
-            await document.exitFullscreen();
-            this.isFullScreen = false;
+        try {
+            if(!this.isFullScreen) {
+                await document.documentElement.requestFullscreen();
+                this.isFullScreen = true;
+            } else {
+                await document.exitFullscreen();
+                this.isFullScreen = false;
+            }
+            if(this.callback !== null)
+                this.callback();
+        } catch(err) {
+            console.log("전체 화면이 안되시는거 같은데요?");
         }
     }
 
@@ -31,5 +38,4 @@ function FullScreen(buttonElement, callback = null) {
      * constructor
      */
     this.buttonElement.addEventListener('click', this.toggleFullScreen);
-    this.onChangeFullScreen(callback);
 }
