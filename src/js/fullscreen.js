@@ -30,7 +30,7 @@ function FullScreen(buttonElement, callback = null) {
             if(this.callback !== null)
                 this.callback();
         } catch(err) {
-            console.log("전체 화면이 안되시는거 같은데요?");
+            console.log(err);
         }
     }
 

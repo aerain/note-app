@@ -4,6 +4,7 @@ const fullScreenButton = document.querySelector('.btn-fullscreen'),
     aboutButton = document.querySelector('.btn-about'),
     aboutOverlay = document.querySelector('.overlay'),
     textarea = document.querySelector('#memo'),
+    noteList = document.querySelector('.note-container'),
     newNote = document.querySelector('.btn-newnote'),
     saveNote = document.querySelector('.btn-savenote-to-storage'),
     savePCNote = document.querySelector('.btn-savenote'),
@@ -21,7 +22,7 @@ const fullscreenCallback = () => {
 
 const fullscreen = new FullScreen(fullScreenButton, fullscreenCallback);
 const overlay = new AboutOverlay(aboutButton, aboutOverlay, 'overlay-toggle');
-const note = new Note(textarea, newNote, saveNote, savePCNote, modal);
+const note = new Note(textarea, noteList, newNote, saveNote, savePCNote, modal);
 
 
 

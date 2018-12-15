@@ -1,5 +1,6 @@
 function Note(
-    noteContent, 
+    noteContent,
+    noteList, 
     newNoteButtonElement, 
     saveNoteToStorageButtonElement,
     saveNoteButtonElement, 
@@ -8,6 +9,7 @@ function Note(
     newModalNoClassName = 'modal-no') {
 
     this.noteContent = noteContent;
+    this.noteList = noteList;
     this.newNoteButtonElement = newNoteButtonElement;
     this.saveNoteToStorageButtonElement = saveNoteToStorageButtonElement;
     this.saveNoteButtonElement = saveNoteButtonElement;
@@ -20,7 +22,7 @@ function Note(
         this.saveNoteToStorageButtonElement.addEventListener('click', this.saveNoteToLocalStorage)
         this.saveNoteButtonElement.addEventListener('click', this.saveNoteToPC);
         this.modalElement.addEventListener('click', this.modalEvent);
-        
+        this.noteList.addEventListener('click', this.deleteItemEventListener);
     }
 
     this.newNote = event => {
@@ -33,25 +35,63 @@ function Note(
     }  
 
     this.saveNoteToLocalStorage = async event => {
-        let note = await this.getNoteDataFromStorage();    
         let item = {
-            id: note.length + 1,
+            id: this.note.lastNumber + 1,
             content: this.noteContent.value
         }
+        this.note.data.push(item);
 
-        note.data.push(item);
-        note.length++;
+        this.note.lastNumber++;
+        this.note.length++;
 
-        await localStorage.setItem("note", JSON.stringify(note));
+        await localStorage.setItem("note", JSON.stringify(this.note));
+
+        this.listItem();
+        
     }
 
+    this.listItem = () => {
+        if(this.note.data.length !== 0) {
+            this.noteList.innerHTML = "";
+            this.note.data
+            .filter(item => item ? true : false)
+            .map(item => {
+                let block = this.renderBlock(item);
+                let hr = document.createElement('hr');
+                hr.className="note-border";
+                this.noteList.append(block);
+                this.noteList.append(hr);
+            });
+            this.modalYes();
+        } else {
+            this.noteList.innerHTML = `
+            아무것도 없어요!
+            `
+        }
+    }
+
+    this.renderBlock = (item) => {
+        let block = document.createElement('div');
+        block.className = "note-item"
+        block.key= item.id;
+        block.innerHTML = 
+        `
+        <div class="note-item-content">${item.content}</div>
+        <button class="note-item-delete material-icons">
+            delete
+        </button>
+        `
+        return block;
+    }
     this.getNoteDataFromStorage = async () => {
         try {
             var note = JSON.parse(await localStorage.getItem("note"));
+            if(note === null) throw err;
         } catch (err) {
             var note = {
                 data : [],
-                length : 0
+                lastNumber : 0,
+                length: 0,
             }
         }
         return note;
@@ -75,6 +115,25 @@ function Note(
         }
     }
 
+    this.deleteItemEventListener = async event => {
+        let trash = event.target;
+        console.log(trash);
+        let number = parseInt(trash.parentNode.key);
+        if(number !== NaN) {
+            this.note.data = this.note.data.filter(item => parseInt(item.id) !== number);
+            this.note.length--;
+            await localStorage.setItem("note", JSON.stringify(this.note));
+            this.listItem();
+        }
+        
+    }
+
+    this.init = async () => {
+        this.note = await this.getNoteDataFromStorage();
+        this.listItem();
+    }
+
     this.setEventListener();
+    this.init();
 
 }
