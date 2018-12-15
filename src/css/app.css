@@ -141,7 +141,7 @@ h1 {
 }
 
 .overlay > .about-layer > * {
-    padding: 20px 10px;
+    padding: 20px 20px;
 }
 .overlay > .about-layer > .profile {
     flex: 1;
@@ -269,11 +269,26 @@ h1 {
     font-weight: bold;
 }
 
-.profile-content-wrap {
+.profile-content-up {
     display: flex;
     flex-direction: row;
+    flex: 1;
 }
 
-.profile-content-wrap > * {
+.profile-content-up > * {
     flex: 1;
+}
+
+.profile-content-down {
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+}
+.profile-content-wrap {
+    display: flex;
+    flex-direction:column;
+}
+
+.profile-content-down > p {
+    text-align:right;
 }

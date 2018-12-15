@@ -1,6 +1,6 @@
 {
   "name": "note-app",
-  "version": "0.0.1",
+  "version": "0.5.0",
   "description": "note app for advanced web class final exam",
   "main": "index.js",
   "scripts": {
