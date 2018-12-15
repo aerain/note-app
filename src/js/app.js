@@ -1,5 +1,3 @@
-console.log('my-note app.js');
-
 const fullScreenButton = document.querySelector('.btn-fullscreen'),
     aboutButton = document.querySelector('.btn-about'),
     aboutOverlay = document.querySelector('.overlay'),

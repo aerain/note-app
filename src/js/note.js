@@ -21,7 +21,7 @@ function Note(
         this.newNoteButtonElement.addEventListener('click', this.newNote);
         this.saveNoteToStorageButtonElement.addEventListener('click', this.saveNoteToLocalStorage)
         this.saveNoteButtonElement.addEventListener('click', this.saveNoteToPC);
-        this.modalElement.addEventListener('click', this.modalEvent);
+        this.modalElement.addEventListener('click', this.checkToClearModal);
         this.noteList.addEventListener('click', this.deleteItemEventListener);
     }
 
@@ -30,7 +30,7 @@ function Note(
             console.log("뭐");
             this.modalElement.classList.add('has-text');
         } else {
-            this.modalEvent();
+            this.checkToClearModal();
         }
     }  
 
@@ -62,7 +62,7 @@ function Note(
                 this.noteList.append(block);
                 this.noteList.append(hr);
             });
-            this.modalYes();
+            this.clearNote();
         } else {
             this.noteList.innerHTML = `
             아무것도 없어요!
@@ -98,19 +98,22 @@ function Note(
     }
         
     this.saveNoteToPC = event => {
-        console.log('저장')
+        let content = this.noteContent.value; 
+        let name = prompt("이름을 입력하세요");
+        let file = new File([content], `${name}.txt`, {type: "text/plain;charset=utf-8"});
+        saveAs(file);
     }
 
-    this.modalYes = () => {
+    this.clearNote = () => {
         this.noteContent.value = "";
     }
 
-    this.modalEvent = event => {
+    this.checkToClearModal = event => {
         let touchedElement = event.target;
         if(touchedElement.className.match(/has-text/) || touchedElement.className === this.newModalNoClassName) {
             this.modalElement.classList.remove('has-text');
         } else if(touchedElement.className === this.newModalYesClassName) {
-            this.modalYes();
+            this.clearNote();
             this.modalElement.classList.remove('has-text');
         }
     }
@@ -118,14 +121,15 @@ function Note(
     this.deleteItemEventListener = async event => {
         let trash = event.target;
         console.log(trash);
-        let number = parseInt(trash.parentNode.key);
-        if(number !== NaN) {
-            this.note.data = this.note.data.filter(item => parseInt(item.id) !== number);
-            this.note.length--;
-            await localStorage.setItem("note", JSON.stringify(this.note));
-            this.listItem();
+        if(trash.classList.contains('note-item-delete')) {
+            let number = parseInt(trash.parentNode.key);
+            if(number !== NaN) {
+                this.note.data = this.note.data.filter(item => parseInt(item.id) !== number);
+                this.note.length--;
+                await localStorage.setItem("note", JSON.stringify(this.note));
+                this.listItem();
+            }
         }
-        
     }
 
     this.init = async () => {
