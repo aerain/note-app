@@ -16,6 +16,7 @@ function Note(
     this.modalElement = modalElement;
     this.newModalYesClassName = newModalYesClassName;
     this.newModalNoClassName = newModalNoClassName;
+    this.waitLoad = "";
 
     this.setEventListener = () => {
         this.newNoteButtonElement.addEventListener('click', this.newNote);
@@ -25,12 +26,9 @@ function Note(
         this.noteList.addEventListener('click', this.deleteItemEventListener);
     }
 
-    this.newNote = event => {
+    this.newNote = (event) => {
         if(this.noteContent.value !== "") {
-            console.log("뭐");
             this.modalElement.classList.add('has-text');
-        } else {
-            this.checkToClearModal();
         }
     }  
 
@@ -62,6 +60,7 @@ function Note(
                 this.noteList.append(block);
                 this.noteList.append(hr);
             });
+
             this.clearNote();
         } else {
             this.noteList.innerHTML = `
@@ -105,7 +104,8 @@ function Note(
     }
 
     this.clearNote = () => {
-        this.noteContent.value = "";
+        this.noteContent.value = this.waitLoad;
+        if(this.waitLoad !== "") this.waltLoad = "";
     }
 
     this.checkToClearModal = event => {
@@ -119,16 +119,19 @@ function Note(
     }
 
     this.deleteItemEventListener = async event => {
-        let trash = event.target;
-        console.log(trash);
-        if(trash.classList.contains('note-item-delete')) {
-            let number = parseInt(trash.parentNode.key);
+        let touchedElement = event.target;
+        console.log(touchedElement);
+        if(touchedElement.classList.contains('note-item-delete')) {
+            let number = parseInt(touchedElement.parentNode.key);
             if(number !== NaN) {
                 this.note.data = this.note.data.filter(item => parseInt(item.id) !== number);
                 this.note.length--;
                 await localStorage.setItem("note", JSON.stringify(this.note));
                 this.listItem();
             }
+        } else if (touchedElement.classList.contains('note-item-content')) {
+            this.waitLoad = touchedElement.innerText;
+            this.newNote(event);
         }
     }
 
